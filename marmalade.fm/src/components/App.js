@@ -52,7 +52,14 @@ class App extends Component {
     togglePlay: () => {
       this.widget.togglePlay();
     },
+
     playMix: mixName => {
+      // if mix name is currently playing mix? pause it instead.
+      const {currentMix} = this.state;
+
+      if(mixName === currentMix) {
+        return this.widget.togglePlay()
+      }
       // update the currentMix in our state with the mixname
       this.setState({
         currentMix: mixName
@@ -61,6 +68,7 @@ class App extends Component {
       // load a mix by its name and start playing it immediately
       this.widget.load(mixName, true);
     }
+
   }
 
   render() {
